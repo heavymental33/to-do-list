@@ -33,11 +33,6 @@ function retreiveData(plan, dsg, pro, test, manage) {
 }
 
 
-
-
-
-
-
 // Send input from section text to array
 
 document.getElementById("add-planning").addEventListener("click", function(){
