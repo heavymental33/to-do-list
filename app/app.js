@@ -9,7 +9,7 @@ var projectManagement = [];
 
 
 // ES6 function to look if the user enter a value
-const EmptyValue = (value) => {
+const emptyValue = (value) => {
     if(value === "" || value === null || value === undefined) {
         return true
     } else {
@@ -37,7 +37,7 @@ function retreiveData(plan, dsg, pro, test, manage) {
 
 document.getElementById("add-planning").addEventListener("click", function(){
     var x = document.getElementById("planning-input").value;
-    if(EmptyValue(x) == true) {
+    if(emptyValue(x) == true) {
         alert("Invalid! Please enter a value");
     } else {
         addInput(x, planification);
@@ -49,7 +49,7 @@ document.getElementById("add-planning").addEventListener("click", function(){
 
   document.getElementById("add-design").addEventListener("click", function(){
     var x = document.getElementById("design-input").value;
-    if(EmptyValue(x) == true) {
+    if(emptyValue(x) == true) {
         alert("Invalid! Please enter a value");
     } else {
      addInput(x, design);
