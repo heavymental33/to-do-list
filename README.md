@@ -11,3 +11,4 @@ A simple To-Do list for manage I.T projects
 - Make the app fully responsive
 - Correct some design elements
 - Make the (?) information modal window
+- All the libraries local (delete cdn)
