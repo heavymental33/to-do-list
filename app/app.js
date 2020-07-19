@@ -22,11 +22,14 @@ function addInput(section, arr) {
     arr.push(section);
     console.log(planification);
     console.log(design);
+    console.log(production);
+    console.log(testing);
+    console.log(projectManagement);
 }
 
-function delInput() {
+// function delInput() {
 
-}
+// }
 
 // Function who save the arrays into the localstorage
 function saveData(arr) {
@@ -45,12 +48,12 @@ function saveData(arr) {
     }
 }
 
-function retreiveData(plan, dsg, pro, test, manage) {
-    // Not complete ,just some ideas
-    for (x in localStorage){
-        console.log(localStorage.getItem(x));
-    }
-}
+// function retreiveData(plan, dsg, pro, test, manage) {
+//     // Not complete ,just some ideas
+//     for (x in localStorage){
+//         console.log(localStorage.getItem(x));
+//     }
+// }
 
 
 // Send input from section text to array (EventListener of the "?")
@@ -100,7 +103,7 @@ document.getElementById("pm-testing").addEventListener("click", function(){
     if(emptyValue(x) == true) {
         alert("Invalid! Please enter a value");
     } else {
-     addInput(x, testing);
+     addInput(x, projectManagement);
      document.getElementById("pm-input").value = "";
     }
 });
