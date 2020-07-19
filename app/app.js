@@ -43,8 +43,6 @@ document.getElementById("add-planning").addEventListener("click", function(){
         addInput(x, planification);
         document.getElementById("planning-input").value = "";     
     }   
-
-
   });
 
   document.getElementById("add-design").addEventListener("click", function(){
@@ -54,5 +52,35 @@ document.getElementById("add-planning").addEventListener("click", function(){
     } else {
      addInput(x, design);
      document.getElementById("design-input").value = "";
+    }
+  });
+
+  document.getElementById("add-production").addEventListener("click", function(){
+    var x = document.getElementById("production-input").value;
+    if(emptyValue(x) == true) {
+        alert("Invalid! Please enter a value");
+    } else {
+     addInput(x, production);
+     document.getElementById("production-input").value = "";
+    }
+  });
+
+  document.getElementById("add-testing").addEventListener("click", function(){
+    var x = document.getElementById("testing-input").value;
+    if(emptyValue(x) == true) {
+        alert("Invalid! Please enter a value");
+    } else {
+     addInput(x, testing);
+     document.getElementById("testing-input").value = "";
+    }
+  });
+
+  document.getElementById("pm-testing").addEventListener("click", function(){
+    var x = document.getElementById("pm-input").value;
+    if(emptyValue(x) == true) {
+        alert("Invalid! Please enter a value");
+    } else {
+     addInput(x, testing);
+     document.getElementById("pm-input").value = "";
     }
   });

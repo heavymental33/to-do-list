@@ -31,7 +31,19 @@ main {
     margin-top: 5em;
 }
 
-i {
+button i {
+    color: #FC600A;
+}
+
+header section div i {
+    color: #FC600A;
+}
+
+footer div i {
+    color: #b2d732;
+}
+
+i[class="fas fa-plus-circle"] {
     color: #FC600A;
 }
 
