@@ -7,10 +7,9 @@ var production = [];
 var testing = [];
 var projectManagement = [];
 
-
 // ES6 function to look if the user enter a value
 const emptyValue = (value) => {
-    if(value === "" || value === null || value === undefined) {
+    if(value === "" || value === null || value === undefined || value.indexOf("  ") >= 0 || value === " ") {
         return true
     } else {
         return false
@@ -27,9 +26,46 @@ function addInput(section, arr) {
     console.log(projectManagement);
 }
 
-// function delInput() {
+function delInput(section, arr) {
+    arr.pop(section);
+    console.log(planification);
+    console.log(design);
+    console.log(production);
+    console.log(testing);
+    console.log(projectManagement);
+}
 
-// }
+function injectList(arr) {
+    //let last = arr[arr.length - 1];
+    if(arr === planification) {
+        // let html = document.getElementById("list-planning");
+        
+        var ul = document.createElement("ul");
+		document.getElementById("list-planning").appendChild(ul);
+		var li = document.createElement("li");
+		ul.appendChild(li);
+        li.innerHTML += '<li class="list-group-item">' + arr.slice(-1)[0] + 
+            '<a href="#" class="badge badge-info priority">Low</a><span class="badge badge-warning priority">Normal</span><span class="badge badge-danger priority">High</span>'
+            
+            '</li>';
+           
+	
+        
+    } else if(arr === design) {
+        let html = '<li class="list-group-item">arr[arr.length - 1]</li>';
+        document.getElementById("list-design").innerHTML = html;  
+    } else if(arr === production) {
+        let html = '<li class="list-group-item">arr[arr.length - 1]</li>';
+        document.getElementById("list-production").innerHTML = html;  
+    } else if(arr === testing) {
+        let html = '<li class="list-group-item">arr[arr.length - 1]</li>';
+        document.getElementById("list-testing").innerHTML = html;  
+    } else if(arr === projectManagement) {
+        let html = '<li class="list-group-item">arr[arr.length - 1]</li>';
+        document.getElementById("list-pm").innerHTML = html;   
+    }
+    
+}
 
 // Function who save the arrays into the localstorage
 function saveData(arr) {
@@ -55,6 +91,10 @@ function saveData(arr) {
 //     }
 // }
 
+function applyPriority(priority) {
+
+}
+
 
 // Send input from section text to array (EventListener of the "?")
 
@@ -64,8 +104,13 @@ document.getElementById("add-planning").addEventListener("click", function(){
         alert("Invalid! Please enter a value");
     } else {
         addInput(x, planification);
-        document.getElementById("planning-input").value = "";     
-    }   
+        document.getElementById("planning-input").value = "";
+        injectList(planification);
+    }
+
+    
+    
+    
 });
 
 document.getElementById("add-design").addEventListener("click", function(){
