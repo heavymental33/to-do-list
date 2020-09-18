@@ -7,6 +7,8 @@ var production = [];
 var testing = [];
 var projectManagement = [];
 
+const planifList = document.querySelector("ul[id='list-planning']");
+
 // ES6 function to look if the user enter a value
 const emptyValue = (value) => {
     if(value === "" || value === null || value === undefined || value.indexOf("  ") >= 0 || value === " ") {
@@ -18,7 +20,7 @@ const emptyValue = (value) => {
 
 // Take the value from the user input text box
 function addInput(section, arr) {
-    arr.push(section);
+    arr.push([section]);
     console.log(planification);
     console.log(design);
     console.log(production);
@@ -38,19 +40,11 @@ function delInput(section, arr) {
 function injectList(arr) {
     //let last = arr[arr.length - 1];
     if(arr === planification) {
-        // let html = document.getElementById("list-planning");
-        
-        var ul = document.createElement("ul");
-		document.getElementById("list-planning").appendChild(ul);
-		var li = document.createElement("li");
-		ul.appendChild(li);
-        li.innerHTML += '<li class="list-group-item">' + arr.slice(-1)[0] + 
-            '<a href="#" class="badge badge-info priority">Low</a><span class="badge badge-warning priority">Normal</span><span class="badge badge-danger priority">High</span>'
-            
-            '</li>';
-           
-	
-        
+		var li = document.getElementById("list-planning");
+        li.innerHTML += '<li class="list-group-item mt-3">' + arr.slice(-1)[0][0] + 
+                        '<i class="fas fa-check-circle space-icons" id="del"></i><i class="fas fa-eraser space-icons"></i>'
+                        '</li>';
+              
     } else if(arr === design) {
         let html = '<li class="list-group-item">arr[arr.length - 1]</li>';
         document.getElementById("list-design").innerHTML = html;  
@@ -84,19 +78,13 @@ function saveData(arr) {
     }
 }
 
-// function retreiveData(plan, dsg, pro, test, manage) {
-//     // Not complete ,just some ideas
-//     for (x in localStorage){
-//         console.log(localStorage.getItem(x));
-//     }
-// }
-
-function applyPriority(priority) {
+function deleteLi() {
 
 }
 
 
-// Send input from section text to array (EventListener of the "?")
+
+// Send input from section text to array (EventListener of the "+")
 
 document.getElementById("add-planning").addEventListener("click", function(){
     var x = document.getElementById("planning-input").value;
@@ -106,11 +94,8 @@ document.getElementById("add-planning").addEventListener("click", function(){
         addInput(x, planification);
         document.getElementById("planning-input").value = "";
         injectList(planification);
-    }
-
-    
-    
-    
+     }
+  
 });
 
 document.getElementById("add-design").addEventListener("click", function(){
@@ -152,3 +137,21 @@ document.getElementById("pm-testing").addEventListener("click", function(){
      document.getElementById("pm-input").value = "";
     }
 });
+
+// Delete and Done buttons
+document.addEventListener('click',function(e){
+    var elem = document.getElementById(e.target);
+    if(e.target && e.target.id == 'del'){
+        var close = document.getElementsByClassName("space-icons");
+        var i;
+        for (i = 0; i < close.length; i++) {
+          close[i].onclick = function() {
+            var div = this.parentElement;
+            div.style.display = "none";
+          }
+        }
+          
+     } 
+     
+ });
+
