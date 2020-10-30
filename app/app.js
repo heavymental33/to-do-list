@@ -7,7 +7,7 @@ var production = [];
 var testing = [];
 var projectManagement = [];
 
-const planifList = document.querySelector("ul[id='list-planning']");
+// const planifList = document.querySelector("ul[id='list-planning']");
 
 // ES6 function to look if the user enter a value
 const emptyValue = (value) => {
@@ -42,7 +42,7 @@ function injectList(arr) {
     if(arr === planification) {
 		var li = document.getElementById("list-planning");
         li.innerHTML += '<li class="list-group-item mt-3">' + arr.slice(-1)[0][0] + 
-                        '<i class="fas fa-check-circle space-icons" id="del"></i><i class="fas fa-eraser space-icons"></i>'
+                        '<i class="fas fa-check-circle space-icons"></i><i class="fas fa-eraser space-icons" id="del"></i>'
                         '</li>';
               
     } else if(arr === design) {
@@ -78,8 +78,20 @@ function saveData(arr) {
     }
 }
 
-function deleteLi() {
 
+function searchArrays(elem) {
+    console.log("Fonction lancé!" + planification + " " + elem);
+    let z = function() {
+        return elem;
+    }
+    var n = planification.findIndex(z);
+    if(n !== -1) {
+        console.log("Exect!");
+        planification.splice(n, 1);
+        console.log(planification);
+    } else {
+        console.log("Dont work my friend!");
+    }
 }
 
 
@@ -147,7 +159,11 @@ document.addEventListener('click',function(e){
         for (i = 0; i < close.length; i++) {
           close[i].onclick = function() {
             var div = this.parentElement;
+            var val = div.innerText; 
+            console.log(val);
+            searchArrays(val);
             div.style.display = "none";
+
           }
         }
           
