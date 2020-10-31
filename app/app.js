@@ -41,26 +41,31 @@ function injectList(arr) {
     //let last = arr[arr.length - 1];
     if(arr === planification) {
 		var li = document.getElementById("list-planning");
-        li.innerHTML += '<li class="list-group-item mt-3">' + arr.slice(-1)[0][0] + 
+        li.innerHTML += '<li class="list-group-item mt-3 plan">' + arr.slice(-1)[0][0] + 
                         '<i class="fas fa-check-circle space-icons"></i><i class="fas fa-eraser space-icons" id="del"></i>'
                         '</li>';
-              
     } else if(arr === design) {
-        let html = '<li class="list-group-item">arr[arr.length - 1]</li>';
-        document.getElementById("list-design").innerHTML = html;  
+        var li = document.getElementById("list-design");
+        li.innerHTML += '<li class="list-group-item mt-3 des">' + arr.slice(-1)[0][0] + 
+                        '<i class="fas fa-check-circle space-icons"></i><i class="fas fa-eraser space-icons" id="del"></i>'
+                        '</li>';
     } else if(arr === production) {
-        let html = '<li class="list-group-item">arr[arr.length - 1]</li>';
-        document.getElementById("list-production").innerHTML = html;  
+        var li = document.getElementById("list-production");
+        li.innerHTML += '<li class="list-group-item mt-3 prod">' + arr.slice(-1)[0][0] + 
+                        '<i class="fas fa-check-circle space-icons"></i><i class="fas fa-eraser space-icons" id="del"></i>'
+                        '</li>'; 
     } else if(arr === testing) {
-        let html = '<li class="list-group-item">arr[arr.length - 1]</li>';
-        document.getElementById("list-testing").innerHTML = html;  
+        var li = document.getElementById("list-testing");
+        li.innerHTML += '<li class="list-group-item mt-3 test">' + arr.slice(-1)[0][0] + 
+                        '<i class="fas fa-check-circle space-icons"></i><i class="fas fa-eraser space-icons" id="del"></i>'
+                        '</li>';  
     } else if(arr === projectManagement) {
-        let html = '<li class="list-group-item">arr[arr.length - 1]</li>';
-        document.getElementById("list-pm").innerHTML = html;   
-    }
-    
+        var li = document.getElementById("list-pm");
+        li.innerHTML += '<li class="list-group-item mt-3 pm">' + arr.slice(-1)[0][0] + 
+                        '<i class="fas fa-check-circle space-icons"></i><i class="fas fa-eraser space-icons" id="del"></i>'
+                        '</li>';
+    }   
 }
-
 // Function who save the arrays into the localstorage
 function saveData(arr) {
     if(arr === planification) {
@@ -79,16 +84,26 @@ function saveData(arr) {
 }
 
 
-function searchArrays(elem) {
+function searchArrays(elem,arr) { // Ajouté array comme paramètre
     console.log("Fonction lancé!" + planification + " " + elem);
     let z = function() {
         return elem;
     }
-    var n = planification.findIndex(z);
-    if(n !== -1) {
-        console.log("Exect!");
+    y = function() {
+        num = elem;
+        return closest(num);
+    }
+    var n = planification.findIndex(z), n1 = design.findIndex(z), n2 = production.findIndex(z), n3 = testing.findIndex(z), n4 = projectManagement.findIndex(z);
+    if(n !== -1 && arr === "planification") {
         planification.splice(n, 1);
-        console.log(planification);
+    } else if(n1 !== -1 && arr === "design") {
+        design.splice(n1, 1);
+    } else if(n2 !== -1 && arr === "production") {
+        production.splice(n2, 1);
+    } else if(n3 !== -1 && arr === "testing") {
+        testing.splice(n3, 1);
+    } else if(n4 !== -1 && arr === "pm") {
+        projectManagement.splice(n4, 1);
     } else {
         console.log("Dont work my friend!");
     }
@@ -117,6 +132,7 @@ document.getElementById("add-design").addEventListener("click", function(){
     } else {
      addInput(x, design);
      document.getElementById("design-input").value = "";
+     injectList(design);
     }
 });
 
@@ -127,6 +143,7 @@ document.getElementById("add-production").addEventListener("click", function(){
     } else {
      addInput(x, production);
      document.getElementById("production-input").value = "";
+     injectList(production);
     }
 });
 
@@ -137,6 +154,7 @@ document.getElementById("add-testing").addEventListener("click", function(){
     } else {
      addInput(x, testing);
      document.getElementById("testing-input").value = "";
+     injectList(testing);
     }
 });
 
@@ -147,12 +165,13 @@ document.getElementById("pm-testing").addEventListener("click", function(){
     } else {
      addInput(x, projectManagement);
      document.getElementById("pm-input").value = "";
+     injectList(projectManagement);
     }
 });
 
 // Delete and Done buttons
 document.addEventListener('click',function(e){
-    var elem = document.getElementById(e.target);
+    // var elem = document.getElementById(e.target);
     if(e.target && e.target.id == 'del'){
         var close = document.getElementsByClassName("space-icons");
         var i;
@@ -160,10 +179,22 @@ document.addEventListener('click',function(e){
           close[i].onclick = function() {
             var div = this.parentElement;
             var val = div.innerText; 
+            console.log(div,val);
+            console.log(div.className + "************************");
+            if(div.className.search("plan") !== -1) {
+               console.log("IT WORKD!!!!!!!!!!!!!!");
+                searchArrays(val,"planification"); 
+            } else if(div.className.search("des") !== -1) {
+                searchArrays(val,"design");
+            } else if(div.className.search("prod") !== -1) {
+                searchArrays(val,"production");
+            } else if(div.className.search("test") !== -1) {
+                searchArrays(val,"testing");
+            } else if(div.className.search("pm") !== -1) {
+                searchArrays(val,"pm");
+            }
             console.log(val);
-            searchArrays(val);
             div.style.display = "none";
-
           }
         }
           
