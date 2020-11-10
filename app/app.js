@@ -202,9 +202,7 @@ document.addEventListener('click',function(e){
             console.log(val);
             div.style.display = "none";
           }
-        }
-          
+        }   
      } 
-     
  });
 
