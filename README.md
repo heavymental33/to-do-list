@@ -8,7 +8,7 @@ JS Vanilla and local storage
 - [ ] Add the priority task
 - [x] Add the function to delete a task
 - [x] Make function that will loop through the local storage for load the informations saved
-- [] Button task done logic
+- [ ] Button task done logic
 - [ ] Update the emptyValue function 
 - [ ] Eventually add a input where the user can put a timer for a task
 - [ ] Make the app fully responsive
