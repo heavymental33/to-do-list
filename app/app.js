@@ -8,12 +8,16 @@ var projectManagement = [];
 console.log(localStorage.getItem("planification"));
 console.log(localStorage.getItem("design"));
 console.log(localStorage.getItem("production"));
+console.log(localStorage.getItem("testing"));
+console.log(localStorage.getItem("pm"));
 
-// A FAIRE! boucle qui va récupéré les données dans le local storage et va les affiché quand l'utilisateur va revenir ou rechargé la page.
 // Call the function of initiation when the user load the page
 function init() {
     loadStorage("planification");
+    loadStorage("design");
     loadStorage("production");
+    loadStorage("testing");
+    loadStorage("pm");
 }
 
 init();
@@ -21,12 +25,12 @@ init();
 function loadStorage(section) {
     if(localStorage.getItem(section) !== null && localStorage.getItem(section) !== "[]" ) {
         var el = document.getElementById("list-" + section);
-        var clef = localStorage.getItem(section);
-        for(var i = 0; i < clef[i].length; i++) {
-            el.innerHTML += '<li class="list-group-item mt-3 plan">' + clef +
+        var obj = JSON.parse(localStorage.getItem(section));
+        for(const key in obj) {  
+            el.innerHTML += '<li class="list-group-item mt-3 '+ section +'">' + obj[key] +
                             '<i class="fas fa-check-circle space-icons"></i><i class="fas fa-eraser space-icons" id="del"></i>'
                             '</li>';
-                        }
+        }
     }   
 }
 
@@ -187,32 +191,30 @@ document.getElementById("pm-testing").addEventListener("click", function(){
 // Delete and Done buttons
 document.addEventListener('click',function(e){
     if(e.target && e.target.id == 'del'){
-        var close = document.getElementsByClassName("space-icons");
-        var i;
-        for (i = 0; i < close.length; i++) {
-          close[i].onclick = function() {
-            var div = this.parentElement;
-            var val = div.innerText;
-            if(div.className.search("plan") !== -1) {
-                searchArrays(val,"planification");
-                saveData("planification"); 
-            } else if(div.className.search("des") !== -1) {
-                searchArrays(val,"design");
-                saveData("design");
-            } else if(div.className.search("prod") !== -1) {
-                searchArrays(val,"production");
-                saveData("production");
-            } else if(div.className.search("test") !== -1) {
-                searchArrays(val,"testing");
-                saveData("testing");
-            } else if(div.className.search("pm") !== -1) {
-                searchArrays(val,"pm");
-                saveData("pm");
-            }
+        // var close = document.getElementsByClassName("space-icons");
+        console.log("Work until now");
+        var div = e.target.parentElement;
+        var val = div.innerText;
+        console.log("Work until now 2" + div.className + val);
+        if(div.className.search("plan") !== -1) {
+            searchArrays(val,"planification");
+            saveData("planification"); 
+        } else if(div.className.search("des") !== -1) {
+            searchArrays(val,"design");
+            saveData("design");
+        } else if(div.className.search("prod") !== -1) {
+            searchArrays(val,"production");
+            saveData("production");
+        } else if(div.className.search("test") !== -1) {
+            searchArrays(val,"testing");
+            saveData("testing");
+        } else if(div.className.search("pm") !== -1) {
+            console.log("Reach the section!");
+            searchArrays(val,"pm");
+            saveData("pm");
+        }
             console.log(val);
             div.style.display = "none";
-          }
-        }   
      } 
  });
 
